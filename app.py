@@ -4,7 +4,7 @@ import pickle
 
 model_filename = 'heart_disease_model.pkl'
 with open(model_filename, 'rb') as file:
-    model = pickle.load(file)
+model = pickle.load(file)
 
 def predict_disease(input_data):
     
