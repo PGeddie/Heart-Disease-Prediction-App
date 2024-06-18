@@ -45,5 +45,3 @@ if st.button("Predict"):
             st.success("The patient is unlikely to have heart disease.")
     except Exception as e:
         st.error(f"Error making prediction: {str(e)}")
-else:
-    st.error("Model could not be loaded. Please check the logs for details.")
