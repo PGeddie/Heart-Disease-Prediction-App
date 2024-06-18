@@ -1,17 +1,20 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
 import pickle
 
-model_filename = 'heart_disease_model.pkl'
-with open(model_filename, 'rb') as file:
-  model = pickle.load(file)
+def load_model():
+    try:
+        with open('heart_disease_model.pkl', 'rb') as file:
+            model = pickle.load(file)
+        return model
+    except Exception as e:
+        st.error(f"Error loading model: {str(e)}")
+        return None
 
-def predict_disease(input_data):
-    
-    data_as_array = np.array(input_data).reshape(1, -1)
-    prediction = model.predict(data_as_array)
-    return prediction[0]
+model = load_model()
 
+if model is not None:
 st.title("Heart Disease Prediction App")
 st.write("""Please enter the patient's details """)
 
@@ -32,10 +35,18 @@ thal = st.selectbox("Status of the heart (1 = normal; 2 = fixed defect; 3 = reve
 if st.button("Predict"):
     try:
         input_data = [age, 1 if sex == "Male" else 0, cp, trestbps, chol, 1 if fbs== "True" else 0, restecg, thalach, 1 if exang== "Yes" else 0, oldpeak, slope, ca, thal]
-        prediction = predict_disease(input_data)
-        if prediction == 1:
-            st.warning("The patient is likely to have heart disease. Further tests are recommended.")
-        else:
-            st.success("The patient is unlikely to have heart disease.")
-    except Exception as e:
-        st.error(f"Error: {str(e)}")
+       input_data = np.array(input_data).reshape(1, -1)
+        
+            st.write("Input data:", input_data)
+
+            prediction = model.predict(input_data)
+            st.write("Model prediction:", prediction)
+
+            if prediction[0] == 1:
+                st.warning("The patient is likely to have heart disease. Further tests are recommended.")
+            else:
+                st.success("The patient is unlikely to have heart disease.")
+        except Exception as e:
+            st.error(f"Error making prediction: {str(e)}")
+else:
+    st.error("Model could not be loaded. Please check the logs for details.")
