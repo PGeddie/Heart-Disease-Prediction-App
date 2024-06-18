@@ -35,7 +35,7 @@ thal = st.selectbox("Status of the heart (1 = normal; 2 = fixed defect; 3 = reve
 if st.button("Predict"):
     try:
         input_data = [age, 1 if sex == "Male" else 0, cp, trestbps, chol, 1 if fbs== "True" else 0, restecg, thalach, 1 if exang== "Yes" else 0, oldpeak, slope, ca, thal]
-       input_data = np.array(input_data).reshape(1, -1)
+        input_data = np.array(input_data).reshape(1, -1)
         
             st.write("Input data:", input_data)
 
