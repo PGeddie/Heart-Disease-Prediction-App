@@ -12,7 +12,7 @@ def predict_disease(input_data):
     prediction = model.predict(data_as_array)
     return prediction[0]
 
-st.title("Heart Disease Prediction App")
+st.title("Heart Disease Prediction App testing test")
 st.write("""Please enter the patient's details """)
 
 age = st.number_input("Age", min_value=0, max_value=120, step=1)
