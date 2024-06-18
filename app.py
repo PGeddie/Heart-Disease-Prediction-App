@@ -39,9 +39,6 @@ if st.button("Predict"):
         
         st.write("Input data:", input_data)
 
-        prediction = model.predict(input_data)
-        st.write("Model prediction:", prediction)
-
         if prediction[0] == 1:
             st.warning("The patient is likely to have heart disease. Further tests are recommended.")
         else:
