@@ -37,16 +37,16 @@ if st.button("Predict"):
         input_data = [age, 1 if sex == "Male" else 0, cp, trestbps, chol, 1 if fbs== "True" else 0, restecg, thalach, 1 if exang== "Yes" else 0, oldpeak, slope, ca, thal]
         input_data = np.array(input_data).reshape(1, -1)
         
-            st.write("Input data:", input_data)
+        st.write("Input data:", input_data)
 
-            prediction = model.predict(input_data)
-            st.write("Model prediction:", prediction)
+        prediction = model.predict(input_data)
+        st.write("Model prediction:", prediction)
 
-            if prediction[0] == 1:
-                st.warning("The patient is likely to have heart disease. Further tests are recommended.")
-            else:
-                st.success("The patient is unlikely to have heart disease.")
-        except Exception as e:
-            st.error(f"Error making prediction: {str(e)}")
+        if prediction[0] == 1:
+            st.warning("The patient is likely to have heart disease. Further tests are recommended.")
+        else:
+            st.success("The patient is unlikely to have heart disease.")
+    except Exception as e:
+        st.error(f"Error making prediction: {str(e)}")
 else:
     st.error("Model could not be loaded. Please check the logs for details.")
