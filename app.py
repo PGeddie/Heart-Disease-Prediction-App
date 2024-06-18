@@ -14,9 +14,9 @@ def load_model():
 
 model = load_model()
 
-if model is not None:
-st.title("Heart Disease Prediction App")
-st.write("""Please enter the patient's details """)
+if model is not None:    
+    st.title("Heart Disease Prediction App")
+    st.write(""" ### Enter the patient's details:""")
 
 age = st.number_input("Age", min_value=0, max_value=120, step=1)
 sex = st.selectbox("Sex", ["Male", "Female"])
